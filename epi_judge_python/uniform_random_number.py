@@ -13,13 +13,21 @@ def zero_one_random():
 
 def uniform_random(lower_bound, upper_bound):
     # TODO - you fill in here.
-    return 0
+    number_of_random_values = upper_bound - lower_bound + 1
+    while True:
+        ans, i = 0, 0
+        while (1 << i) < number_of_random_values:
+            ans = (ans << 1) | zero_one_random()
+            i += 1
+        if ans < number_of_random_values:
+            break
+    return ans + lower_bound
 
 
 @enable_executor_hook
 def uniform_random_wrapper(executor, lower_bound, upper_bound):
     def uniform_random_runner(executor, lower_bound, upper_bound):
-        result = executor.run(lambda : [uniform_random(lower_bound, upper_bound) for _ in range(100000)])
+        result = executor.run(lambda: [uniform_random(lower_bound, upper_bound) for _ in range(100000)])
 
         return check_sequence_is_uniformly_random(
             [a - lower_bound
