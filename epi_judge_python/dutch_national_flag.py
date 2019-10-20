@@ -9,7 +9,63 @@ RED, WHITE, BLUE = range(3)
 
 def dutch_flag_partition(pivot_index, A):
     # TODO - you fill in here.
-    return
+    # # Time complexity : O(n)
+    # # Space complexity : O(n)
+    # lt, eq, gt = [], [], []
+    # for i in A:
+    #     if i < A[pivot_index]:
+    #         lt.append(i)
+    #     elif i == A[pivot_index]:
+    #         eq.append(i)
+    #     else:
+    #         gt.append(i)
+    # return lt + eq + gt
+
+    # # Time complexity : O(n^2)
+    # # Space complexity : O(1)
+    # for i in range(len(A)):
+    #     for j in range(i + 1, len(A)):
+    #         if A[j] < A[pivot_index]:
+    #             A[i], A[j] = A[j], A[i]
+    #             break
+    #
+    # for i in range(len(A) - 1, -1, -1):
+    #     for j in range(i - 1, -1, -1):
+    #         if A[j] > A[pivot_index]:
+    #             A[i], A[j] = A[j], A[i]
+    #             break
+    # return A
+
+    # # Time complexity : O(n)
+    # # Space complexity : O(1)
+    # # Two passes
+    # small = 0
+    # for i in range(1, len(A)):
+    #     if A[i] < A[pivot_index]:
+    #         A[i], A[small] = A[small], A[i]
+    #         small += 1
+    # big = len(A) - 1
+    # for i in reversed(range(len(A))):
+    #     if A[i] > A[pivot_index]:
+    #         A[i], A[big] = A[big], A[i]
+    #         big -= 1
+    # return A
+
+    # Time complexity : O(n)
+    # Space complexity : O(1)
+    # Single pass
+    small, equal, greater = 0, 0, len(A) - 1
+    while equal < greater:
+        if A[equal] < A[pivot_index]:
+            A[small], A[equal] = A[equal], A[small]
+            small += 1
+            equal += 1
+        elif A[equal] == A[pivot_index]:
+            equal += 1
+        else:
+            A[greater], A[equal] = A[equal], A[greater]
+            greater -= 1
+    return A
 
 
 @enable_executor_hook
