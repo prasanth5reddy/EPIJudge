@@ -3,7 +3,11 @@ from test_framework import generic_test
 
 def search_list(L, key):
     # TODO - you fill in here.
-    return None
+    while L:
+        if L.data == key:
+            return L
+        L = L.next
+    return
 
 
 def search_list_wrapper(L, key):
