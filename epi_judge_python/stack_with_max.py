@@ -3,20 +3,33 @@ from test_framework.test_failure import TestFailure
 
 
 class Stack:
+    def __init__(self):
+        self.stack = []
+
+    # Time complexity : O(1) for each operation
+    # Space complexity: O(n)
     def empty(self):
         # TODO - you fill in here.
-        return True
+        return len(self.stack) == 0
 
     def max(self):
         # TODO - you fill in here.
-        return 0
+        if self.empty():
+            return
+        return self.stack[-1][1]
 
     def pop(self):
         # TODO - you fill in here.
-        return 0
+        if self.empty():
+            return
+        return self.stack.pop()[0]
 
     def push(self, x):
         # TODO - you fill in here.
+        if not self.empty():
+            self.stack.append((x, max(x, self.max())))
+        else:
+            self.stack.append((x, x))
         return
 
 
