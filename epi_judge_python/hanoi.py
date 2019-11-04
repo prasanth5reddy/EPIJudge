@@ -8,8 +8,17 @@ NUM_PEGS = 3
 
 
 def compute_tower_hanoi(num_rings):
-    # TODO - you fill in here.
-    return []
+    # Time Complexity : O(2^n)
+    # Space Complexity : O(n)
+    def helper(n, from_peg, to_peg, use_peg):
+        if n > 0:
+            helper(n - 1, from_peg, use_peg, to_peg)
+            ans.append([from_peg, to_peg])
+            helper(n - 1, use_peg, to_peg, from_peg)
+
+    ans = []
+    helper(num_rings, 0, 1, 2)
+    return ans
 
 
 @enable_executor_hook
