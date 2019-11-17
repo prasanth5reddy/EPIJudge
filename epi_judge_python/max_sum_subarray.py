@@ -2,8 +2,13 @@ from test_framework import generic_test
 
 
 def find_maximum_subarray(A):
-    # TODO - you fill in here.
-    return -1
+    if len(A) == 0:
+        return 0
+    max_cur, max_so_far = 0, 0
+    for i in range(len(A)):
+        max_cur = max(A[i], A[i] + max_cur)
+        max_so_far = max(max_so_far, max_cur)
+    return max_so_far
 
 
 if __name__ == '__main__':
